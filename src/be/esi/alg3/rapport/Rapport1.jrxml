@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5921f75f-ad88-4b18-ba76-bf255d036ef7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="114"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LECID_P" class="java.lang.String"/>
+	<parameter name="TITLE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     LECTEUR."LECID" AS LECTEUR_LECID,
+     LECTEUR."NOM" AS LECTEUR_NOM,
+     LECTEUR."PRENOM" AS LECTEUR_PRENOM,
+     LECTEUR."EMAIL" AS LECTEUR_EMAIL,
+     LECTEUR."TYPELECTEUR" AS LECTEUR_TYPELECTEUR,
+     LIVRE."LIVID" AS LIVRE_LIVID,
+     LIVRE."EDITION" AS LIVRE_EDITION,
+     LIVRE."DATEACQUISITION" AS LIVRE_DATEACQUISITION,
+     LIVRE."LECTEUR" AS LIVRE_LECTEUR,
+     LIVRE."EMPDEPUIS" AS LIVRE_EMPDEPUIS,
+     LIVRE."NBRAPPELS" AS LIVRE_NBRAPPELS,
+     LIVRE."RETOURPREVU" AS LIVRE_RETOURPREVU,
+     LIVRE."PERDU" AS LIVRE_PERDU,
+     LIVRE."EMPRUNTABLE" AS LIVRE_EMPRUNTABLE,
+     AUTEUR."AUTID" AS AUTEUR_AUTID,
+     AUTEUR."NOM" AS AUTEUR_NOM,
+     AUTEUR."PRENOM" AS AUTEUR_PRENOM,
+     AECRIT."AUTEUR" AS AECRIT_AUTEUR,
+     AECRIT."EDITION" AS AECRIT_EDITION,
+     EDITION."EDID" AS EDITION_EDID,
+     EDITION."ISBN13" AS EDITION_ISBN13,
+     EDITION."ISBN" AS EDITION_ISBN,
+     EDITION."TITRE" AS EDITION_TITRE,
+     EDITION."FORMAT" AS EDITION_FORMAT,
+     EDITION."COLLECTION" AS EDITION_COLLECTION,
+     EDITION."VILLE" AS EDITION_VILLE,
+     EDITION."ANNEEPARUTION" AS EDITION_ANNEEPARUTION,
+     EDITION."EDITEUR" AS EDITION_EDITEUR
+FROM
+     "APP"."LECTEUR" LECTEUR INNER JOIN "APP"."LIVRE" LIVRE ON LECTEUR."LECID" = LIVRE."LECTEUR"
+     INNER JOIN "APP"."EDITION" EDITION ON LIVRE."EDITION" = EDITION."EDID"
+     INNER JOIN "APP"."AECRIT" AECRIT ON EDITION."EDID" = AECRIT."EDITION"
+     INNER JOIN "APP"."AUTEUR" AUTEUR ON AECRIT."AUTEUR" = AUTEUR."AUTID"
+where lecid = $P!{LECID_P}
+]]>
+	</queryString>
+	<field name="LECTEUR_LECID" class="java.math.BigDecimal"/>
+	<field name="LECTEUR_NOM" class="java.lang.String"/>
+	<field name="LECTEUR_PRENOM" class="java.lang.String"/>
+	<field name="LECTEUR_EMAIL" class="java.lang.String"/>
+	<field name="LECTEUR_TYPELECTEUR" class="java.lang.String"/>
+	<field name="LIVRE_LIVID" class="java.math.BigDecimal"/>
+	<field name="LIVRE_EDITION" class="java.math.BigDecimal"/>
+	<field name="LIVRE_DATEACQUISITION" class="java.sql.Date"/>
+	<field name="LIVRE_LECTEUR" class="java.math.BigDecimal"/>
+	<field name="LIVRE_EMPDEPUIS" class="java.sql.Date"/>
+	<field name="LIVRE_NBRAPPELS" class="java.math.BigDecimal"/>
+	<field name="LIVRE_RETOURPREVU" class="java.sql.Date"/>
+	<field name="LIVRE_PERDU" class="java.lang.String"/>
+	<field name="LIVRE_EMPRUNTABLE" class="java.lang.String"/>
+	<field name="AUTEUR_AUTID" class="java.math.BigDecimal"/>
+	<field name="AUTEUR_NOM" class="java.lang.String"/>
+	<field name="AUTEUR_PRENOM" class="java.lang.String"/>
+	<field name="AECRIT_AUTEUR" class="java.math.BigDecimal"/>
+	<field name="AECRIT_EDITION" class="java.math.BigDecimal"/>
+	<field name="EDITION_EDID" class="java.math.BigDecimal"/>
+	<field name="EDITION_ISBN13" class="java.lang.String"/>
+	<field name="EDITION_ISBN" class="java.lang.String"/>
+	<field name="EDITION_TITRE" class="java.lang.String"/>
+	<field name="EDITION_FORMAT" class="java.lang.String"/>
+	<field name="EDITION_COLLECTION" class="java.lang.String"/>
+	<field name="EDITION_VILLE" class="java.lang.String"/>
+	<field name="EDITION_ANNEEPARUTION" class="java.math.BigDecimal"/>
+	<field name="EDITION_EDITEUR" class="java.math.BigDecimal"/>
+	<variable name="EMAIL" class="java.lang.String"/>
+	<group name="LECTEUR_LECID">
+		<groupExpression><![CDATA[$F{LECTEUR_LECID}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ccffe521-1a58-4764-819b-7229c30fbd10" x="0" y="0" width="95" height="20"/>
+				<textElement/>
+				<text><![CDATA[Madame, Monsieur ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="348379e4-746e-44b5-993f-558be5e1c775" mode="Transparent" x="95" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LECTEUR_NOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fd48fae6-6eeb-4e3f-a00c-61bd71b614b4" x="195" y="0" width="100" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LECTEUR_PRENOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="07b548df-8812-4543-93e6-7cad96771752" x="0" y="20" width="100" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LECTEUR_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0803bd78-aade-419a-8193-23981424893f" x="0" y="40" width="802" height="26"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TITLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b8c7d6e5-219b-4cdb-b8d5-d02a60eb2a57" x="0" y="0" width="208" height="35"/>
+				<textElement/>
+				<text><![CDATA[Liste des livres en emprunts :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<line>
+				<reportElement uuid="72923b6b-d91f-4de9-9aaa-ad925154c5b4" x="0" y="19" width="802" height="1" forecolor="#666666"/>
+			</line>
+			<textField>
+				<reportElement uuid="f9917a53-8ab1-41d1-9a6d-7426ee667918" x="0" y="0" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4c284449-eb1e-42b8-8577-165c20c1437c" x="163" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7b527573-0fbc-4302-b60f-d1ee6a9a765c" x="263" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LIVRE_EMPDEPUIS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6b0f9c0a-2a0a-44bf-a329-bab05c439d7f" x="363" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LIVRE_RETOURPREVU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="508303c6-6767-4cb0-8cc5-ba12c4f1d88f" x="463" y="0" width="19" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{LIVRE_NBRAPPELS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1f7c51f8-f2ab-44a8-b552-0f2233ead940" x="482" y="0" width="125" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="414792c0-932e-45bb-9416-1494a02cb3ff" x="607" y="0" width="161" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b594220e-3fe5-47a0-88c9-4215fb7e4b09" x="0" y="3" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="ce6bb6c8-8e77-4d0d-80cc-a4056119ae9a" x="80" y="3" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
