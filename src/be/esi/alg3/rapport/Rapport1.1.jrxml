@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5921f75f-ad88-4b18-ba76-bf255d036ef7">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="112"/>
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="124"/>
 	<property name="ireport.y" value="0"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
 	<parameter name="LECID_P" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -70,6 +76,7 @@ where lecid = $P!{LECID_P}]]>
 	<field name="EDITION_ANNEEPARUTION" class="java.math.BigDecimal"/>
 	<field name="EDITION_EDITEUR" class="java.math.BigDecimal"/>
 	<variable name="EMAIL" class="java.lang.String"/>
+	<variable name="RETARD" class="java.lang.String"/>
 	<group name="LECTEUR_LECID">
 		<groupExpression><![CDATA[$F{LECTEUR_LECID}]]></groupExpression>
 	</group>
@@ -83,8 +90,8 @@ where lecid = $P!{LECID_P}]]>
 				<textElement/>
 				<text><![CDATA[Madame, Monsieur ]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="348379e4-746e-44b5-993f-558be5e1c775" mode="Transparent" x="95" y="0" width="100" height="20"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="348379e4-746e-44b5-993f-558be5e1c775" mode="Transparent" x="95" y="0" width="100" height="20" isPrintWhenDetailOverflows="true"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{LECTEUR_NOM}]]></textFieldExpression>
 			</textField>
@@ -99,7 +106,8 @@ where lecid = $P!{LECID_P}]]>
 				<textFieldExpression><![CDATA[$F{LECTEUR_EMAIL}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="7666404b-a61a-4a8f-9006-08af5b90baa6" x="369" y="29" width="100" height="50"/>
+				<reportElement uuid="a0f85ef1-96f6-4b24-9795-c795eb46b606" x="364" y="5" width="75" height="70"/>
+				<imageExpression><![CDATA["D:\\Documents\\NetBeansProjects\\TD2-G35099-Desneux\\Ressources\\Biblio.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -116,56 +124,61 @@ where lecid = $P!{LECID_P}]]>
 		<band height="28" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="26" splitType="Stretch">
-			<line>
-				<reportElement uuid="72923b6b-d91f-4de9-9aaa-ad925154c5b4" x="0" y="19" width="802" height="1" forecolor="#666666"/>
-			</line>
-			<textField>
-				<reportElement uuid="f9917a53-8ab1-41d1-9a6d-7426ee667918" x="0" y="0" width="163" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="4c284449-eb1e-42b8-8577-165c20c1437c" x="163" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="7b527573-0fbc-4302-b60f-d1ee6a9a765c" x="263" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{LIVRE_EMPDEPUIS}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="6b0f9c0a-2a0a-44bf-a329-bab05c439d7f" x="363" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{LIVRE_RETOURPREVU}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="508303c6-6767-4cb0-8cc5-ba12c4f1d88f" x="463" y="0" width="19" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{LIVRE_NBRAPPELS}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="1f7c51f8-f2ab-44a8-b552-0f2233ead940" x="482" y="0" width="125" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="414792c0-932e-45bb-9416-1494a02cb3ff" x="607" y="0" width="161" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
-			</textField>
+		<band height="40" splitType="Stretch">
+			<frame>
+				<reportElement uuid="3d9f2803-653d-41b5-a1e1-2a704d48d5f2" style="Row" mode="Opaque" x="0" y="0" width="802" height="40"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="f9917a53-8ab1-41d1-9a6d-7426ee667918" stretchType="RelativeToBandHeight" x="0" y="0" width="260" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4c284449-eb1e-42b8-8577-165c20c1437c" x="260" y="0" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="7b527573-0fbc-4302-b60f-d1ee6a9a765c" x="360" y="0" width="84" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{LIVRE_EMPDEPUIS}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="6b0f9c0a-2a0a-44bf-a329-bab05c439d7f" x="444" y="0" width="92" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{LIVRE_RETOURPREVU}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="508303c6-6767-4cb0-8cc5-ba12c4f1d88f" x="536" y="0" width="19" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{LIVRE_NBRAPPELS}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="1f7c51f8-f2ab-44a8-b552-0f2233ead940" x="16" y="20" width="125" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="effe8819-329b-4620-8a05-3c7652456da1" x="0" y="20" width="16" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Éd.]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="601a37a6-bb7a-4faa-9f7d-1afbd78e8f28" x="555" y="0" width="173" height="20" forecolor="#FF0000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{RETARD}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="23" splitType="Stretch">
+		<band height="44" splitType="Stretch">
 			<textField>
-				<reportElement uuid="b594220e-3fe5-47a0-88c9-4215fb7e4b09" x="0" y="3" width="80" height="20"/>
+				<reportElement uuid="b594220e-3fe5-47a0-88c9-4215fb7e4b09" x="0" y="23" width="80" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="ce6bb6c8-8e77-4d0d-80cc-a4056119ae9a" x="80" y="3" width="40" height="20"/>
+				<reportElement uuid="ce6bb6c8-8e77-4d0d-80cc-a4056119ae9a" x="80" y="23" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>

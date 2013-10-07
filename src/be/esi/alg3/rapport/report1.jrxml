@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f936662-68c3-43c3-9536-e92b9ca93253">
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     AUTEUR."AUTID" AS AUTEUR_AUTID,
+     AUTEUR."NOM" AS AUTEUR_NOM,
+     AUTEUR."PRENOM" AS AUTEUR_PRENOM,
+     EDITEUR."EDID" AS EDITEUR_EDID,
+     EDITEUR."EDLIBELLE" AS EDITEUR_EDLIBELLE,
+     EDITION."EDID" AS EDITION_EDID,
+     EDITION."ISBN13" AS EDITION_ISBN13,
+     EDITION."ISBN" AS EDITION_ISBN,
+     EDITION."TITRE" AS EDITION_TITRE,
+     EDITION."FORMAT" AS EDITION_FORMAT,
+     EDITION."COLLECTION" AS EDITION_COLLECTION,
+     EDITION."VILLE" AS EDITION_VILLE,
+     EDITION."ANNEEPARUTION" AS EDITION_ANNEEPARUTION,
+     EDITION."EDITEUR" AS EDITION_EDITEUR,
+     LECTEUR."LECID" AS LECTEUR_LECID,
+     LECTEUR."NOM" AS LECTEUR_NOM,
+     LECTEUR."PRENOM" AS LECTEUR_PRENOM,
+     LECTEUR."EMAIL" AS LECTEUR_EMAIL,
+     LECTEUR."TYPELECTEUR" AS LECTEUR_TYPELECTEUR,
+     LIVRE."LIVID" AS LIVRE_LIVID,
+     LIVRE."EDITION" AS LIVRE_EDITION,
+     LIVRE."DATEACQUISITION" AS LIVRE_DATEACQUISITION,
+     LIVRE."LECTEUR" AS LIVRE_LECTEUR,
+     LIVRE."EMPDEPUIS" AS LIVRE_EMPDEPUIS,
+     LIVRE."NBRAPPELS" AS LIVRE_NBRAPPELS,
+     LIVRE."RETOURPREVU" AS LIVRE_RETOURPREVU,
+     LIVRE."PERDU" AS LIVRE_PERDU,
+     LIVRE."EMPRUNTABLE" AS LIVRE_EMPRUNTABLE,
+     AECRIT."AUTEUR" AS AECRIT_AUTEUR,
+     AECRIT."EDITION" AS AECRIT_EDITION
+FROM
+     "APP"."EDITEUR" EDITEUR INNER JOIN "APP"."EDITION" EDITION ON EDITEUR."EDID" = EDITION."EDITEUR"
+     INNER JOIN "APP"."LIVRE" LIVRE ON EDITION."EDID" = LIVRE."EDITION"
+     INNER JOIN "APP"."AECRIT" AECRIT ON EDITION."EDID" = AECRIT."EDITION"
+     INNER JOIN "APP"."AUTEUR" AUTEUR ON AECRIT."AUTEUR" = AUTEUR."AUTID"
+     INNER JOIN "APP"."LECTEUR" LECTEUR ON LIVRE."LECTEUR" = LECTEUR."LECID"]]>
+	</queryString>
+	<field name="AUTEUR_AUTID" class="java.math.BigDecimal"/>
+	<field name="AUTEUR_NOM" class="java.lang.String"/>
+	<field name="AUTEUR_PRENOM" class="java.lang.String"/>
+	<field name="EDITEUR_EDID" class="java.math.BigDecimal"/>
+	<field name="EDITEUR_EDLIBELLE" class="java.lang.String"/>
+	<field name="EDITION_EDID" class="java.math.BigDecimal"/>
+	<field name="EDITION_ISBN13" class="java.lang.String"/>
+	<field name="EDITION_ISBN" class="java.lang.String"/>
+	<field name="EDITION_TITRE" class="java.lang.String"/>
+	<field name="EDITION_FORMAT" class="java.lang.String"/>
+	<field name="EDITION_COLLECTION" class="java.lang.String"/>
+	<field name="EDITION_VILLE" class="java.lang.String"/>
+	<field name="EDITION_ANNEEPARUTION" class="java.math.BigDecimal"/>
+	<field name="EDITION_EDITEUR" class="java.math.BigDecimal"/>
+	<field name="LECTEUR_LECID" class="java.math.BigDecimal"/>
+	<field name="LECTEUR_NOM" class="java.lang.String"/>
+	<field name="LECTEUR_PRENOM" class="java.lang.String"/>
+	<field name="LECTEUR_EMAIL" class="java.lang.String"/>
+	<field name="LECTEUR_TYPELECTEUR" class="java.lang.String"/>
+	<field name="LIVRE_LIVID" class="java.math.BigDecimal"/>
+	<field name="LIVRE_EDITION" class="java.math.BigDecimal"/>
+	<field name="LIVRE_DATEACQUISITION" class="java.sql.Date"/>
+	<field name="LIVRE_LECTEUR" class="java.math.BigDecimal"/>
+	<field name="LIVRE_EMPDEPUIS" class="java.sql.Date"/>
+	<field name="LIVRE_NBRAPPELS" class="java.math.BigDecimal"/>
+	<field name="LIVRE_RETOURPREVU" class="java.sql.Date"/>
+	<field name="LIVRE_PERDU" class="java.lang.String"/>
+	<field name="LIVRE_EMPRUNTABLE" class="java.lang.String"/>
+	<field name="AECRIT_AUTEUR" class="java.math.BigDecimal"/>
+	<field name="AECRIT_EDITION" class="java.math.BigDecimal"/>
+	<group name="LECTEUR_LECID">
+		<groupExpression><![CDATA[$F{LECTEUR_LECID}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement uuid="d575af4a-4e9a-4732-8f33-bfe8097ae8b3" mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#000000"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement uuid="89068a9a-6fdc-48ce-a0a9-b7b05b0b26ba" style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="24" forecolor="#FFFFFF"/>
+						<textElement>
+							<font isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{LECTEUR_LECID}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<image>
+				<reportElement uuid="4abe6a70-c199-429c-a9a0-3b0afd401383" x="456" y="0" width="99" height="132"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement uuid="8a628ebf-f464-497d-874c-e0aee45a00e7" mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000"/>
+				<staticText>
+					<reportElement uuid="9a8efb9d-123e-428e-a145-bfad65d29707" style="Title" x="0" y="0" width="370" height="66"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="216c521a-e329-4b3b-8266-4ccc725b609f" style="SubTitle" x="157" y="66" width="249" height="29"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry SubTitle]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="2da7577f-6cd4-4906-ad5b-cfc6edc388cb" mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#CC0000"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="6c388e25-d8f4-48ec-a9b3-927014d52e39" x="307" y="12" width="144" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b5554b6c-2f8b-4f25-86b2-950a9cc44989" style="Column header" x="0" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[AUTEUR_AUTID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f246b9db-02e8-4418-b46d-26ca31b1744d" style="Column header" x="19" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[AUTEUR_NOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6c19365c-6a10-4bba-bc47-f24064db9b68" style="Column header" x="38" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[AUTEUR_PRENOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0b64cd4a-bd8f-442f-9b59-978885758c00" style="Column header" x="57" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITEUR_EDID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ca53d3b-a4eb-484a-9629-5731347bfbda" style="Column header" x="76" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITEUR_EDLIBELLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="809719d6-4581-4671-b30a-69b5f3e13e3a" style="Column header" x="95" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_EDID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1270422e-5ca3-4109-9efc-22aaf8d66b41" style="Column header" x="114" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_ISBN13]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="86f703ec-997e-45a0-808f-eec4aee1cb23" style="Column header" x="133" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_ISBN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e17e1b12-bd36-4960-8837-9cd8969e13e9" style="Column header" x="152" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_TITRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd1b8ffe-d91e-437c-9368-748b4b3a8656" style="Column header" x="171" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_FORMAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e77cd83-e0a2-43af-acc0-49076d8d9a8a" style="Column header" x="190" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_COLLECTION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fc7c7ed6-512b-41dd-8652-77ba047b82d5" style="Column header" x="209" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_VILLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9f60c8d-3e2a-4cc7-a7bb-e2511d7425a5" style="Column header" x="228" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_ANNEEPARUTION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="83f5bc6d-8565-439f-ad40-24dfd5857df6" style="Column header" x="247" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[EDITION_EDITEUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2bdd72d8-d4fd-46ff-b71f-129bcf37105c" style="Column header" x="266" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LECTEUR_NOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9021c57-7216-4cad-ae47-297066ba6499" style="Column header" x="285" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LECTEUR_PRENOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="837261dd-bf7e-4951-8c2a-8bbca297784c" style="Column header" x="304" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LECTEUR_EMAIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="51b13733-9dcd-40cb-bb50-f795c17ff61e" style="Column header" x="323" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LECTEUR_TYPELECTEUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f70c048a-51ca-4b11-bece-72b10df9cbce" style="Column header" x="342" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_LIVID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea44653e-c29b-4dd0-bbea-6ce3b161ec5b" style="Column header" x="361" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_EDITION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93d0b28b-6d3e-439b-be3b-a352600807cb" style="Column header" x="380" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_DATEACQUISITION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="841ecea2-d708-49e5-a98f-ab91a069f403" style="Column header" x="399" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_LECTEUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5716b9f4-f431-4b09-a94b-3329a4ba7dde" style="Column header" x="418" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_EMPDEPUIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1936d7cc-03e9-4c8d-b33e-60c8afb00281" style="Column header" x="437" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_NBRAPPELS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="662a2d33-469c-43a6-8223-5ce91fe01803" style="Column header" x="456" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_RETOURPREVU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f8f48b99-a428-4e79-a097-33cc301bea81" style="Column header" x="475" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_PERDU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5dab00d3-7f9f-4053-be54-9c12987a2c97" style="Column header" x="494" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[LIVRE_EMPRUNTABLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7f03e69-8fc8-4158-a5ca-d544aff9fc15" style="Column header" x="513" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[AECRIT_AUTEUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d67ccde2-485d-44ea-9f52-7bafb29222d1" style="Column header" x="532" y="7" width="19" height="18" forecolor="#000000"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[AECRIT_EDITION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement uuid="8e91daae-1fbe-4590-8509-b06d7259c9ab" style="Row" mode="Opaque" x="0" y="0" width="555" height="18"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="e3f88ab6-6228-4819-9193-6587e5a82fb0" style="Detail" positionType="Float" x="0" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AUTEUR_AUTID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="9a996ebb-a83d-45bf-9aa5-3eb1a6edfd43" style="Detail" positionType="Float" x="19" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AUTEUR_NOM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="261df81c-d241-48eb-9ef9-fdb5fcd4d064" style="Detail" positionType="Float" x="38" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AUTEUR_PRENOM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="efc5ca67-b818-4866-bfd1-a6f5bf45f9ae" style="Detail" positionType="Float" x="57" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITEUR_EDID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0db60e31-e434-48f5-8780-317b94143a7c" style="Detail" positionType="Float" x="76" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITEUR_EDLIBELLE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="103aca44-2fa6-4424-8c07-e98f543c16ea" style="Detail" positionType="Float" x="95" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_EDID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="238f5eff-7b88-4cd4-88e8-36b8fa6e478b" style="Detail" positionType="Float" x="114" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="9d19b05b-7953-4b46-8cc4-fe20c5a8d908" style="Detail" positionType="Float" x="133" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_ISBN}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="efd0d5ce-6ade-4e6c-969b-c0cb54ed8568" style="Detail" positionType="Float" x="152" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="56eb61b5-1697-4a1b-a2d0-6bcefdaef6ab" style="Detail" positionType="Float" x="171" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_FORMAT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="30cdf583-5be9-4552-b0ba-2f65be8a7aa3" style="Detail" positionType="Float" x="190" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_COLLECTION}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="132062dd-01b9-4b88-af0d-257f041415e8" style="Detail" positionType="Float" x="209" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_VILLE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5921ed93-8692-400e-b7fd-d5742119edfa" style="Detail" positionType="Float" x="228" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_ANNEEPARUTION}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="834a28b9-fac9-419d-960b-7dfaf4e922f7" style="Detail" positionType="Float" x="247" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITION_EDITEUR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="e9e5cece-2934-48b6-91b4-5972d17776fa" style="Detail" positionType="Float" x="266" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LECTEUR_NOM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a5d782dd-51bb-44bf-bd55-09beccb7403b" style="Detail" positionType="Float" x="285" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LECTEUR_PRENOM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="947a6332-081c-4015-977c-bfd7f5a6b029" style="Detail" positionType="Float" x="304" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LECTEUR_EMAIL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5440c20f-9141-435f-8325-7ec8520903d1" style="Detail" positionType="Float" x="323" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LECTEUR_TYPELECTEUR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="1e2b64e2-38d1-481c-9f53-da4fc6ddecb3" style="Detail" positionType="Float" x="342" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_LIVID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c14c020b-bb1b-43de-b912-b12563359ae1" style="Detail" positionType="Float" x="361" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_EDITION}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0e344501-6197-4fc1-94b5-c005aa9a5539" style="Detail" positionType="Float" x="380" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_DATEACQUISITION}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a94355f5-859e-46ab-998f-eed3f13121e4" style="Detail" positionType="Float" x="399" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_LECTEUR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="2dc65981-2f95-4dc3-b961-7dc761867f16" style="Detail" positionType="Float" x="418" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_EMPDEPUIS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5742dc7b-348a-461c-8379-23b8b7c02d37" style="Detail" positionType="Float" x="437" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_NBRAPPELS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="76a6bf01-701e-4260-8ee8-1acf4f4365fd" style="Detail" positionType="Float" x="456" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_RETOURPREVU}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="992cfe2d-8f4a-44a5-8960-7111d18385d8" style="Detail" positionType="Float" x="475" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_PERDU}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="a2053907-81be-4a5a-a6e6-724b29d8b218" style="Detail" positionType="Float" x="494" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIVRE_EMPRUNTABLE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="ea97594a-1fe2-43fd-837e-199f1c5db095" style="Detail" positionType="Float" x="513" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AECRIT_AUTEUR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="2689a003-f06b-4ff3-afd6-b467a3fd7ab9" style="Detail" positionType="Float" x="532" y="0" width="19" height="18"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AECRIT_EDITION}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement uuid="fbb75dc1-bb51-4a48-a8af-d3952e78ba25" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement uuid="be0d9a28-2c4d-4bb2-8d54-dba214081a1b" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000"/>
+				<textField evaluationTime="Report">
+					<reportElement uuid="98e2970e-77aa-4bef-9e8c-fd42527d2ef8" style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="209243e4-ee0a-431e-b8ba-762b03d2f4ce" style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="1a7762c9-9d05-4e26-89a3-69a772ab164a" style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

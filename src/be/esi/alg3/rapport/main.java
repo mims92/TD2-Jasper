@@ -15,5 +15,7 @@ public class main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        java.util.Date d = new java.util.Date();
+        //($F{LIVRE_RETOURPREVU}.getTime() > new java.util.Date().getTime()) ? "Livre en retard" : ""
     }
 }
