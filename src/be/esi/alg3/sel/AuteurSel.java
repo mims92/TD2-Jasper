@@ -19,6 +19,9 @@ public class AuteurSel {
     private String nom;
     private int id;
 
+    public AuteurSel() {
+        
+    }
     public AuteurSel(int id){
         this.id=id;
     }

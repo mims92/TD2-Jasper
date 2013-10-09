@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aef70b50-266a-4a60-b66c-b7039f4578dc">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="2"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="TITRE" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      AECRIT."AUTEUR" AS AECRIT_AUTEUR,
@@ -25,7 +26,7 @@ FROM
      "APP"."AUTEUR" AUTEUR INNER JOIN "APP"."AECRIT" AECRIT ON AUTEUR."AUTID" = AECRIT."AUTEUR"
      INNER JOIN "APP"."EDITION" EDITION ON AECRIT."EDITION" = EDITION."EDID"
      INNER JOIN "APP"."EDITEUR" EDITEUR ON EDITION."EDITEUR" = EDITEUR."EDID"
-ORDER BY EDITEUR."EDID" ASC, AUTEUR."NOM" ASC]]>
+ORDER BY EDITEUR."EDID", AUTEUR."NOM"]]>
 	</queryString>
 	<field name="AECRIT_AUTEUR" class="java.math.BigDecimal"/>
 	<field name="AECRIT_EDITION" class="java.math.BigDecimal"/>
@@ -43,9 +44,34 @@ ORDER BY EDITEUR."EDID" ASC, AUTEUR."NOM" ASC]]>
 	<field name="EDITION_VILLE" class="java.lang.String"/>
 	<field name="EDITION_ANNEEPARUTION" class="java.math.BigDecimal"/>
 	<field name="EDITION_EDITEUR" class="java.math.BigDecimal"/>
-	<variable name="NB_LIVRES" class="java.lang.Number" resetType="Group" resetGroup="EDITEUR_EDID" incrementType="Group" incrementGroup="EDITEUR_EDID" calculation="Sum"/>
+	<variable name="NB_LIVRES" class="java.lang.Integer" resetType="Group" resetGroup="EDITEUR_EDLIBELLE" incrementType="Group" incrementGroup="AUTEUR_NOM" calculation="Count"/>
+	<group name="EDITEUR_EDLIBELLE" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{EDITEUR_EDLIBELLE}]]></groupExpression>
+		<groupHeader>
+			<band height="22" splitType="Immediate">
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="EDITEUR_EDLIBELLE">
+					<reportElement uuid="7759ae47-b768-48dd-8f01-0acce87c4c11" isPrintRepeatedValues="false" x="0" y="0" width="175" height="20" printWhenGroupChanges="EDITEUR_EDLIBELLE"/>
+					<textElement>
+						<font isUnderline="true" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EDITEUR_EDLIBELLE}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="EDITEUR_EDID" pattern="">
+					<reportElement uuid="32ca5dc6-637f-4fb2-ab1e-f18c7e739ea7" x="175" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{NB_LIVRES}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
 	<group name="EDITEUR_EDID">
 		<groupExpression><![CDATA[$F{EDITEUR_EDID}]]></groupExpression>
+	</group>
+	<group name="AUTEUR_NOM">
+		<groupExpression><![CDATA[$F{AUTEUR_NOM}]]></groupExpression>
+	</group>
+	<group name="AUTEUR_AUTID">
+		<groupExpression><![CDATA[$F{AUTEUR_AUTID}]]></groupExpression>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -53,48 +79,32 @@ ORDER BY EDITEUR."EDID" ASC, AUTEUR."NOM" ASC]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement uuid="1e037130-8d2b-4da2-9d45-2ec0eb0c5687" x="200" y="3" width="78" height="76"/>
+				<reportElement uuid="1e037130-8d2b-4da2-9d45-2ec0eb0c5687" x="175" y="3" width="78" height="76"/>
 				<imageExpression><![CDATA["C:\\Users\\G35099\\Documents\\NetBeansProjects\\TD2-Jasper\\Ressources\\Biblio.png"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement uuid="c3062471-25ab-4baa-a2ad-4b2d2d9bb6ff" x="253" y="32" width="302" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TITRE}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
-	<columnHeader>
-		<band height="21" splitType="Stretch">
-			<textField>
-				<reportElement uuid="7759ae47-b768-48dd-8f01-0acce87c4c11" x="0" y="1" width="278" height="20"/>
-				<textElement>
-					<font isUnderline="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{EDITEUR_EDLIBELLE}]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Group" evaluationGroup="EDITEUR_EDID" pattern="">
-				<reportElement uuid="32ca5dc6-637f-4fb2-ab1e-f18c7e739ea7" x="278" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$V{NB_LIVRES}]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnHeader>
 	<detail>
-		<band height="20">
+		<band height="22">
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="3ca57c68-7371-449a-858b-cff99eb7363d" stretchType="RelativeToTallestObject" x="20" y="0" width="100" height="20"/>
+				<reportElement uuid="3ca57c68-7371-449a-858b-cff99eb7363d" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="70" y="0" width="83" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{AUTEUR_NOM}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="a22206bd-eb1e-47ce-b4f3-87951e0d51ca" stretchType="RelativeToTallestObject" x="140" y="0" width="100" height="20"/>
+				<reportElement uuid="a22206bd-eb1e-47ce-b4f3-87951e0d51ca" stretchType="RelativeToTallestObject" x="153" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{AUTEUR_PRENOM}]]></textFieldExpression>
-			</textField>
-		</band>
-		<band height="22">
-			<textField>
-				<reportElement uuid="bf1c6934-8a3a-4517-9f73-8daaec308403" x="317" y="0" width="118" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{AUTEUR_PRENOM} == null ? "" : $F{AUTEUR_PRENOM}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="4299b858-07c3-4496-a906-37862a682cd2" x="55" y="0" width="223" height="20"/>
+				<reportElement uuid="4299b858-07c3-4496-a906-37862a682cd2" x="253" y="0" width="217" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
 			</textField>
@@ -111,6 +121,16 @@ ORDER BY EDITEUR."EDID" ASC, AUTEUR."NOM" ASC]]>
 				<reportElement uuid="0c9b854c-53a7-432c-8da1-987ac40a89b5" x="80" y="34" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="b94c0d54-e5e1-4813-9c8c-fbc6f3dd9043" x="454" y="34" width="65" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement uuid="a934e19d-11b8-482f-af4a-4fa4897e39a2" x="519" y="34" width="36" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
