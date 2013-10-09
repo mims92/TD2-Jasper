@@ -2,8 +2,8 @@ package be.esi.alg3.jasper.sel;
 
 
 import be.esi.alg2.ebiblio.exception.EbiblioDbException;
-import be.esi.alg3.jasper.entite.Auteur;
-import be.esi.alg3.jasper.entite.Editeur;
+import be.esi.alg3.jasper.entities.Auteur;
+import be.esi.alg3.jasper.entities.Editeur;
 import java.util.Collection;
 
 /**

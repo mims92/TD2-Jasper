@@ -5,7 +5,7 @@
 package be.esi.alg3.jasper.gui;
 
 import be.esi.alg2.gui.outils.JPCritSelGenerique;
-import be.esi.alg3.jasper.entite.Auteur;
+import be.esi.alg3.jasper.entities.Auteur;
 import be.esi.alg3.jasper.sel.AuteurSel;
 
 /**

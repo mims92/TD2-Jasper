@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.esi.alg3.jasper.gui.lancement;
+package be.esi.alg3.jasper.gui.launch;
 
 import be.esi.alg3.jasper.statics.GenerateReports;
 import java.util.logging.Level;
@@ -96,11 +96,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JPretsLecteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JPretsLecteurActionPerformed
-        try {
-            GenerateReports.generateReport("Etiquettes", null);
-        } catch (JRException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GenerateReports.generateReport("Etiquettes", null);
     }//GEN-LAST:event_JPretsLecteurActionPerformed
 
     private void JGenererEtiquetteActonPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JGenererEtiquetteActonPerformed

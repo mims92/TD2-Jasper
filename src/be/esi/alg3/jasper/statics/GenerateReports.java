@@ -5,8 +5,12 @@
 package be.esi.alg3.jasper.statics;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import org.eclipse.persistence.internal.databaseaccess.DatasourcePlatform;
 
 /**
  *
@@ -22,22 +26,21 @@ public class GenerateReports {
             connection = Database.getConnection();
             statement = connection.createStatement();
             HashMap parameterMap = new HashMap();
-            parameterMap.put("rtitle", "Report Title Here");//sending the report title as a parameter.
-            Report rpt = new Report(parameterMap, connection);
-            rpt.setReportName("productlist"); //productlist is the name of my jasper file.
-            rpt.callReport();
-            return true;
-        } catch (Exception e) {
+            parameterMap.put("TITLE", "Flo Biblio");//sending the report title as a parameter.
+            JasperFillManager.fillReportToFile(name".jasper" , parameterMap, null);
+            
+            return true;          
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
                 statement.close();
                 connection.close();
-                return true;
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return true;
         }
+        
+        return true;
     }
 }

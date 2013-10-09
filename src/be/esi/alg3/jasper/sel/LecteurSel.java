@@ -1,6 +1,6 @@
 package be.esi.alg3.jasper.sel;
 
-import be.esi.alg3.jasper.entite.Typelecteur;
+import be.esi.alg3.jasper.entities.Typelecteur;
 
 /**
  * Classe d'instanciation de critères de sélection de lecteurs

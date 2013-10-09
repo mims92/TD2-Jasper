@@ -7,7 +7,7 @@ package be.esi.alg3.jasper.gui;
  
 import be.esi.alg2.gui.outils.MaJTable;
 import be.esi.alg2.gui.outils.MaJTableInitialisationException;
-import be.esi.alg3.jasper.entite.Auteur;
+import be.esi.alg3.jasper.entities.Auteur;
 import java.util.Collection;
 
 /**

@@ -1,7 +1,7 @@
 package be.esi.alg3.jasper.sel;
 
-import be.esi.alg3.jasper.entite.Edition;
-import be.esi.alg3.jasper.entite.Lecteur;
+import be.esi.alg3.jasper.entities.Edition;
+import be.esi.alg3.jasper.entities.Lecteur;
 
 
 
