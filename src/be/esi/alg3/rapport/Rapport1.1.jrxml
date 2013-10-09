@@ -107,7 +107,7 @@ where lecid = $P!{LECID_P}]]>
 			</textField>
 			<image>
 				<reportElement uuid="a0f85ef1-96f6-4b24-9795-c795eb46b606" x="360" y="0" width="75" height="70"/>
-				<imageExpression><![CDATA["C:\\Users\\G35099\\Documents\\NetBeansProjects\\TD2-Jasper\\Ressources\\Biblio.png"]]></imageExpression>
+				<imageExpression><![CDATA["D:\\Documents\\NetBeansProjects\\TD2-G35099-Desneux\\Ressources\\Biblio.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

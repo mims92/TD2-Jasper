@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba741d85-43b0-4163-b7c7-b5aac01c66ad">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     AUTEUR."AUTID" AS AUTEUR_AUTID,
+     AUTEUR."NOM" AS AUTEUR_NOM,
+     AUTEUR."PRENOM" AS AUTEUR_PRENOM,
+     EDITEUR."EDID" AS EDITEUR_EDID,
+     EDITEUR."EDLIBELLE" AS EDITEUR_EDLIBELLE,
+     ACLE."MOT" AS ACLE_MOT,
+     ACLE."EDITION" AS ACLE_EDITION,
+     AECRIT."AUTEUR" AS AECRIT_AUTEUR,
+     AECRIT."EDITION" AS AECRIT_EDITION,
+     EDITION."EDID" AS EDITION_EDID,
+     EDITION."ISBN13" AS EDITION_ISBN13,
+     EDITION."ISBN" AS EDITION_ISBN,
+     EDITION."TITRE" AS EDITION_TITRE,
+     EDITION."FORMAT" AS EDITION_FORMAT,
+     EDITION."COLLECTION" AS EDITION_COLLECTION,
+     EDITION."VILLE" AS EDITION_VILLE,
+     EDITION."ANNEEPARUTION" AS EDITION_ANNEEPARUTION,
+     EDITION."EDITEUR" AS EDITION_EDITEUR
+FROM
+     "APP"."AUTEUR" AUTEUR INNER JOIN "APP"."AECRIT" AECRIT ON AUTEUR."AUTID" = AECRIT."AUTEUR"
+     INNER JOIN "APP"."EDITION" EDITION ON AECRIT."EDITION" = EDITION."EDID"
+     INNER JOIN "APP"."EDITEUR" EDITEUR ON EDITION."EDITEUR" = EDITEUR."EDID"
+     INNER JOIN "APP"."ACLE" ACLE ON EDITION."EDID" = ACLE."EDITION"]]>
+	</queryString>
+	<field name="AUTEUR_AUTID" class="java.math.BigDecimal"/>
+	<field name="AUTEUR_NOM" class="java.lang.String"/>
+	<field name="AUTEUR_PRENOM" class="java.lang.String"/>
+	<field name="EDITEUR_EDID" class="java.math.BigDecimal"/>
+	<field name="EDITEUR_EDLIBELLE" class="java.lang.String"/>
+	<field name="ACLE_MOT" class="java.math.BigDecimal"/>
+	<field name="ACLE_EDITION" class="java.math.BigDecimal"/>
+	<field name="AECRIT_AUTEUR" class="java.math.BigDecimal"/>
+	<field name="AECRIT_EDITION" class="java.math.BigDecimal"/>
+	<field name="EDITION_EDID" class="java.math.BigDecimal"/>
+	<field name="EDITION_ISBN13" class="java.lang.String"/>
+	<field name="EDITION_ISBN" class="java.lang.String"/>
+	<field name="EDITION_TITRE" class="java.lang.String"/>
+	<field name="EDITION_FORMAT" class="java.lang.String"/>
+	<field name="EDITION_COLLECTION" class="java.lang.String"/>
+	<field name="EDITION_VILLE" class="java.lang.String"/>
+	<field name="EDITION_ANNEEPARUTION" class="java.math.BigDecimal"/>
+	<field name="EDITION_EDITEUR" class="java.math.BigDecimal"/>
+	<group name="AUTEUR_AUTID">
+		<groupExpression><![CDATA[$F{AUTEUR_AUTID}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement uuid="cf91ce0d-b3a0-4dfb-b68b-8a690ac053d3" x="207" y="10" width="70" height="69"/>
+				<imageExpression><![CDATA["D:\\Documents\\NetBeansProjects\\TD2-G35099-Desneux\\Ressources\\Biblio.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="3e0aa2dc-4336-43aa-ae9c-e46591443cb3" x="0" y="13" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{AUTEUR_NOM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1cccc72d-8aba-425f-b76b-7eefdecf58f7" x="100" y="13" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[ :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="4c6bfb04-1a42-4710-995f-06fa3ac781f9" x="46" y="33" width="154" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d9a109a0-cf59-4f46-b1a5-f17ff07328c4" x="207" y="33" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_ISBN13}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c7da6b65-e47f-4e63-80d6-0d6420d7fcd5" x="0" y="21" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="1d54cda1-fc23-4c29-8da8-5ce61bb56ef9" x="80" y="22" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

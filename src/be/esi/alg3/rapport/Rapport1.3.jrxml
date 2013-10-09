@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      EDITION."EDID" AS EDITION_EDID,
      EDITION."ISBN13" AS EDITION_ISBN13,
@@ -30,16 +30,21 @@ FROM
 		<groupExpression><![CDATA[$F{EDITION_EDID}]]></groupExpression>
 	</group>
 	<detail>
-		<band height="125" splitType="Stretch">
-			<rectangle>
-				<reportElement uuid="04429aa3-010a-4ab2-8af4-4b0dc3257363" x="0" y="0" width="185" height="20"/>
-			</rectangle>
-			<rectangle>
-				<reportElement uuid="04429aa3-010a-4ab2-8af4-4b0dc3257363" x="185" y="0" width="185" height="20"/>
-			</rectangle>
-			<rectangle>
-				<reportElement uuid="04429aa3-010a-4ab2-8af4-4b0dc3257363" x="370" y="0" width="185" height="20"/>
-			</rectangle>
+		<band height="279" splitType="Stretch">
+			<textField>
+				<reportElement uuid="653bad59-23c2-44d2-893c-c5065a0cd67e" x="0" y="0" width="34" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_EDID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="753270e5-aa32-4e0e-b357-18dffd58343e" x="34" y="0" width="151" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{EDITION_TITRE}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="372417e9-c4fe-45c2-af13-fc65e861d6b1" x="215" y="122" width="100" height="50"/>
+				<imageExpression><![CDATA[new com.keepdynamic.barcode.generator.jasperreports.BarcodeRenderer(com.keepdynamic.barcode.generator.jasperreports.BarcodeFactory.createLinear(8, "123456789"))]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 </jasperReport>
